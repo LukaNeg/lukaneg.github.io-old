@@ -1,16 +1,18 @@
 ---
-title: "index"
-author: "Luka Negoita"
-date: "11/11/2019"
+title: "Luka Negoita"
 output: html_document
 ---
 
 <!--
+<body style="width:50%;align:center">
 Best websites for building rmarkdown github pages:
 https://jules32.github.io/rmarkdown-website-tutorial/basic_workflow.html
 https://bookdown.org/yihui/rmarkdown/html-document.html#appearance_and_style
+Icons: https://fontawesome.com/v4.7.0/cheatsheet/
 --> 
-Valid themes include “default”, “cerulean”, “journal”, “flatly”, “readable”, “spacelab”, “united”, “cosmo”, “lumen”, “paper”, “sandstone”, “simplex”, and “yeti”.
+Valid themes include “”, “”, “”, “”, “”, “”, “”, and “”.
+
+Good ones: simplex, yeti, lumen
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
