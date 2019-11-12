@@ -5,6 +5,9 @@ date: "11/11/2019"
 output: html_document
 ---
 
+# Best website for building rmarkdown github pages:
+# https://jules32.github.io/rmarkdown-website-tutorial/basic_workflow.html
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
