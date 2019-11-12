@@ -5,8 +5,12 @@ date: "11/11/2019"
 output: html_document
 ---
 
-# Best website for building rmarkdown github pages:
-# https://jules32.github.io/rmarkdown-website-tutorial/basic_workflow.html
+<!--
+Best websites for building rmarkdown github pages:
+https://jules32.github.io/rmarkdown-website-tutorial/basic_workflow.html
+https://bookdown.org/yihui/rmarkdown/html-document.html#appearance_and_style
+--> 
+Valid themes include “default”, “cerulean”, “journal”, “flatly”, “readable”, “spacelab”, “united”, “cosmo”, “lumen”, “paper”, “sandstone”, “simplex”, and “yeti”.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
