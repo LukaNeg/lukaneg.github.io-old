@@ -1,14 +1,26 @@
-name: "my-website"
+name: "data-portfolio"
 navbar:
-  title: "My Website"
+  title: "Luka Negoita"
   left:
-    - text: "Home"
+    - text: "Me"
+      icon: fa-leaf
       href: index.html
-    - text: "Projects"
-      href: projects.html
+    - text: "Portfolio"
+      icon: fa-code
+      href: portfolio.html
+    - text: "Portfolio 3"
+      href: portfolio3.html
+  right:
+    - icon: fa-envelope-o
+      href: mailto:lukanegoita@gmail.com
+    - icon: fa-linkedin
+      href: https://www.linkedin.com/in/negoita/
+    - icon: fa-github
+      href: https://https://github.com/LukaNeg
+      
 output:
   html_document:
-    theme: default
+    theme: lumen
     highlight: textmate
     include:
       after_body: footer.html
