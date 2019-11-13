@@ -1,6 +1,7 @@
 name: "data-portfolio"
 navbar:
-  title: "Luka Negoita"
+  title: "Luka Negoita, PhD"
+  
   left:
     - text: "Me"
       icon: fa-leaf
@@ -8,20 +9,22 @@ navbar:
     - text: "Portfolio"
       icon: fa-code
       href: portfolio.html
-    - text: "Portfolio 3"
-      href: portfolio3.html
+    - text: "Resume"
+      icon: fa-file
+      href: images/resume_10_12_19.pdf
   right:
     - icon: fa-envelope-o
       href: mailto:lukanegoita@gmail.com
     - icon: fa-linkedin
       href: https://www.linkedin.com/in/negoita/
     - icon: fa-github
-      href: https://https://github.com/LukaNeg
+      href: https://github.com/LukaNeg
 output_dir: "."
 output:
   html_document:
     theme: lumen
     highlight: textmate
     include:
+      #before_body: header.html
       after_body: footer.html
     css: styles.css
