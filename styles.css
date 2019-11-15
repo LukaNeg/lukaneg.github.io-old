@@ -29,6 +29,16 @@ body {
   text-align: left;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .caption {
   font-size: 0.9em;
   font-style: italic;
@@ -38,3 +48,14 @@ body {
   text-align: center;
 }
 
+.polaroid {
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+.container {
+  text-align: center;
+  padding: 10px 20px;
+}

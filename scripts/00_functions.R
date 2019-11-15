@@ -11,6 +11,9 @@ library(knitr)
 library(DT)
 library(xtable)
 library(pander)
+library(flexdashboard)
+library(png)      # For grabbing the dimensions of png files
+#source("https://install-github.me/atusy/cssgrid") #https://github.com/atusy/cssgrid
 # library(devtools)
 # library(remef)
 # library(geosphere)

@@ -1,0 +1,54 @@
+---
+title: "computer-scrape"
+author: "Luka Negoita"
+date: "11/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+<br>
+I want to learn a bit more about myself. I always said my computer is my life... so lets find out what it has to say about me.
+
+First, here is the code I used to scrape everything in my Documents directory and create a list of files with all of their info:
+
+```{r eval=F, echo=T}
+setwd("~/Documents")
+all_dir <- list.dirs()
+file_data <- NULL
+for(d in all_dir){
+  files <- list.files(path=d)
+  for(f in files){
+    file_data <- rbind(file_data,as.data.frame(file.info(paste(d,f, sep="/"))))
+  }
+}
+```
+
+<br>
+But this took a long time to run, so here are the data uploaded now
+
+```{r echo=T, message=FALSE, results="hide"}
+setwd("../")
+file_data <- read_csv("private_data/scraped_files_info.csv")
+```
+
+<br>
+Now clean up the data a bit
+
+```{r}
+file_data$path <- row.names(file_data)
+file_data <- as_tibble(file_data)
+
+file_dat_clean <- mutate(file_data,
+                         name = sub('.*/', '', path)) %>%
+  select(size, isdir, mtime, ctime, atime, path, name) %>%
+  arrange(mtime) %>%
+  mutate(index = cumsum(size>=0),
+         date_create = as.Date(ctime),
+         date_mod = as.Date(mtime),
+         ext = sub('^[^.]*', '', name))
+```
+
