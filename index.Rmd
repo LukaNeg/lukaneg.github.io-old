@@ -1,11 +1,19 @@
 ---
 pagetitle: "About Me"
 output: 
-  html_document: 
-    theme: lumen
+  html_document
 ---
-
 <!--
+<style>
+.main-container {
+  width: auto;
+  max-width: 700 !important;
+  margins: auto;
+}
+</style>
+
+
+
 good themes: Good ones: simplex, yeti, lumen
 <body style="width:50%;align:center">
 Best websites for building rmarkdown github pages:
@@ -14,6 +22,23 @@ https://bookdown.org/yihui/rmarkdown/html-document.html#appearance_and_style
 Icons: https://fontawesome.com/v4.7.0/cheatsheet/
 https://holtzy.github.io/Pimp-my-rmd/
 --> 
+
+
+```{css, echo=FALSE}
+
+# this adjusts the current page
+
+body .main-container {
+  max-width: 700px !important;
+  width: 700px !important;
+}
+body {
+  max-width: 700px !important;
+}
+```
+
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, cache=T)
@@ -27,7 +52,9 @@ source("scripts/welcome_page.R")
 <br>
 <br>
 <p><b>
-I believe the fundamental beauty of the world comes from understanding the stories behind the patterns we see—and that is what I seek as a data scientist. I eat, sleep, and breathe managing, analyzing, visualizing, and presenting data. Have some data? Let me clean it. Have some numbers? Let me tell a story.
+I believe the fundamental beauty of the world comes from understanding the stories behind the patterns we see—and that is what I seek as a data scientist. I eat, sleep, and breathe managing, analyzing, visualizing, and presenting data. Have some data? Let me clean it. Have some numbers? Let me tell a story. 
+<br>
+[Here's a link](presentation.html)
 </b></p>
 
 

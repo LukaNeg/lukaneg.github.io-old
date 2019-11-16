@@ -22,9 +22,9 @@ navbar:
 output_dir: "."
 output:
   html_document:
-    theme: lumen
+    theme: yeti
     highlight: textmate
     include:
       #before_body: header.html
       after_body: footer.html
-    css: styles.css
+    css: bootstrap.css

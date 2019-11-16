@@ -1,0 +1,85 @@
+---
+title: "Insert crafty title here"
+subtitle: "Insert descriptive blurb here"
+author: "Luka Negoita"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    smooth_scroll: false
+    code_folding: show
+    highlight: tango
+editor_options: 
+  chunk_output_type: inline
+---
+
+<style>
+body {
+  width: auto;
+  max-width: 1000;
+}
+
+.toc-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</style>
+
+```{r setup, include=FALSE}
+# set knitr chunk options for entire document
+## center and hold placement of figures, don't print package and function messages/warnings
+knitr::opts_chunk$set(fig.align = "center", fig.pos = "h", 
+                      message = FALSE, warning = FALSE)
+
+# load "behind-the-scenes" R packages, create custom graphic options 
+library(citr)
+library(tidyverse)
+library(lubridate)
+#library(ggplot2)
+# mythemes <- list(
+#     theme(strip.background = element_rect(color = NA)) +
+#     theme(axis.text.x = element_text(size = 14)) + theme(axis.text.y = element_text(size = 14)) + 
+#     theme(axis.title.x = element_text(size = 16)) + theme(axis.title.y = element_text(size = 16)) +
+#     theme(legend.title = element_text(size = 14)) + theme(legend.text = element_text(size = 14)) +
+#     theme(strip.text.x = element_text(size = 14)) + theme(plot.title = element_text(size = 16)))
+```
+
+\  
+\  
+
+# Overview
+***
+*Summary of project, data, and analysis.*
+
+\ 
+\ 
+# Data preparation
+***
+*Here is where you work on data cleaning, preparations for analyses.*
+
+\ 
+\ 
+
+# Analysis
+***
+*Here is where you present your analyses, figures, etc.*
+
+\ 
+\ 
+
+# Discussion
+***
+*Summary of your entire report.*
+
+\ 
+\ 
+
+# Session info
+***
+
+```{r}
+sessionInfo()
+```
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
