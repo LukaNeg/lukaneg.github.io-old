@@ -17,7 +17,7 @@
 .caption {
   font-size: 0.9em;
   font-style: italic;
-  color: grey;
+  color: #5A8D9D;
   margin-right: 0%;
   margin-left: 0%;  
   text-align: center;
@@ -1127,7 +1127,7 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.4;
-  color: #222222;
+  color: #26596B;
   background-color: #f6f6f6;
 }
 input,
@@ -1139,12 +1139,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #008cba;
+  color: #5A8D9D;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #008cba;
+  color: #5A8D9D;
   text-decoration: underline;
 }
 a:focus {
@@ -4264,7 +4264,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  height: 45px;
+  height: 60px;
   padding: 12px 20px;
   font-size: 22px;
   line-height: 33px;
@@ -4288,8 +4288,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: right;
   padding: 9px 10px;
   margin-right: 15px;
-  margin-top: 5.5px;
-  margin-bottom: 5.5px;
+  margin-top: 7px;
+  margin-bottom: 7px;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
@@ -4300,9 +4300,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-toggle .icon-bar {
   display: block;
-  width: 22px;
-  height: 2px;
-  border-radius: 1px;
+  width: 28px;
+  height: 5px;
+  border-radius: 2px;
 }
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
@@ -4552,7 +4552,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #ffffff;
+  background-color: #DCFF9F;
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
