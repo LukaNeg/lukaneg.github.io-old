@@ -23,6 +23,17 @@
   text-align: center;
 }
 
+.list-group-item.active, 
+.list-group-item.active:hover, 
+.list-group-item.active:focus {
+    z-index: 2;
+    color: #DCFF9F !important;
+    background-color: #26596B !important;
+    border-color: #26596B !important;
+}
+
+
+
 #TOC {
   position: fixed;
   margin: 25px 30px 30px 100px;
@@ -30,6 +41,8 @@
   width: 220px;
   height: 30%;
   overflow:auto;
+  color: #26596B;
+  background-color: #FFFFFF;
 }
 
 @media (max-width: 768px) {
@@ -39,7 +52,13 @@
 }
 }
 
-
+body {
+  width: auto;
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 5em;
+  justify-content: center;
+}
 
 
 html {
@@ -47,13 +66,7 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-body {
-  width: auto;
-  max-width: 1000px;
-  margin: auto;
-  padding-top: 5em;
-  justify-content: center;
-}
+
 article,
 aside,
 details,
@@ -4146,7 +4159,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 45px;
-  margin-bottom: 21px;
+  margin-bottom: 33px;
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
@@ -4251,10 +4264,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  height: 45px;
-  padding: 12px 15px;
-  font-size: 19px;
-  line-height: 21px;
+  height: 60px;
+  padding: 12px 20px;
+  font-size: 22px;
+  line-height: 33px;
+  font-weight: 500;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4337,8 +4351,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 .navbar-form {
