@@ -8,7 +8,8 @@ knitr::opts_chunk$set(echo = FALSE, cache=T)
 ```
 
 
-<br>
+<!--
+
 <br>
 
 <div class="column-right">
@@ -53,34 +54,5 @@ knitr::include_graphics("images/soils ordination.png")
 ```
 </div>
 
-
-
-
-
-<!--
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_5terre.jpg">
-![hello](images/bayesian.png){width="600"}
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
-
-
-
-```{r, out.width = "400px"}
-knitr::include_graphics("images/bayesian.png")
-```
-<div class="column-left">
-  ```{r, out.width = "300px"}
-  knitr::include_graphics("images/bayesian.png")
-  ```
-</div>
-
-<br>
-<br>
-<br>
 
 -->
