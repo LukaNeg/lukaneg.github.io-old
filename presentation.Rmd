@@ -1,6 +1,6 @@
 ---
-title: "Insert crafty title here"
-subtitle: "Insert descriptive blurb here"
+title: "Under Construction"
+subtitle: "description"
 author: "Luka Negoita"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
