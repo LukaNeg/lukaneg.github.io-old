@@ -6696,8 +6696,8 @@ button.close {
 }
 .navbar {
   border: none;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
 }
 .navbar .navbar-toggle:hover .icon-bar {
   background-color: #b3b3b3;
