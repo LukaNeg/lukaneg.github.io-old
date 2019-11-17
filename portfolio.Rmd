@@ -24,9 +24,19 @@ body {
 
 <h3>*UNDER CONSTRUCTION*</h3>
 <br>
+<br>
 
 
+<div class="row">
+<div class="column-left" style="vertical-align: top;">
+<img src="icons/trees dark.png" alt="" style="width:100px" class="center">
+</div>
+<div class="column-right" style="vertical-align: bottom;">
+<h2>**Comparative study of the plants and soils on two islands**</h3>
+</div>
+</div>
 
+<br><br><br>
 
 <div class="row">
 
