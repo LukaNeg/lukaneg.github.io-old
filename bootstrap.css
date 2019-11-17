@@ -21,10 +21,9 @@
   color: #26596B;
 }
 
-
 img {
   border-radius: 5px;
-  margin: 5px 5px 5px 5px;
+  margin: 10px 5px 0px 0px;
 }
 
 a:hover img {
@@ -134,15 +133,26 @@ body {
   float: left;
   width: 30%;
   text-align: left;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .column-right{
   float: right;
   width: 70%;
   text-align: left;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+footer {
+  clear: both;
 }
 
 
@@ -1748,10 +1758,8 @@ pre code {
   margin-left: auto;
 }
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 .row-no-gutters {
   margin-right: 0;

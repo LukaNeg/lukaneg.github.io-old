@@ -1,6 +1,6 @@
 ---
-pagetitle: "Data Science Portfolio"
-title: "Portfolio"
+pagetitle: "Portfolio"
+title: ""
 output: html_document
 ---
 
@@ -22,20 +22,19 @@ body {
 }
 ```
 
-<h3>*UNDER CONSTRUCTION*</h3>
+<!-- <h3>*UNDER CONSTRUCTION*</h3> -->
 <br>
 <br>
 
-
+<!-- _________________Duck Islands Paper_____________________________ -->
 <div class="row">
-<div class="column-left" style="vertical-align: top;">
+<div class="column-left">
 <img src="icons/trees dark.png" alt="" style="width:100px" class="center">
 </div>
-<div class="column-right" style="vertical-align: bottom;">
-<h2>**Comparative study of the plants and soils on two islands**</h3>
+<div class="column-right">
+<h2>**Comparative study of the plants and soils on two islands**</h2>
 </div>
 </div>
-
 
 <div class="row">
 
@@ -73,23 +72,24 @@ Here I compared the plant communities and soil features of two adjacent islands 
 </div>
 </div>
 </div>
+</div>
 <hr>
+
+
+<!-- ____________________Maine Island Functional Trait paper____________________________ -->
+<div class="row">
+<div class="column-left">
+<img src="icons/leaf dark.png" alt="" style="width:80px" class="center">
+</div>
+<div class="column-right" >
+<br><br><br><br>
+<h2>**Can plant dispersal drive ecosystem function?**</h2>
 </div>
 </div>
-
-
-
-
-
-
-
-
-<br><br><br>
 
 <div class="row">
 
 <div class="column-left">
-<img src="icons/trees dark.png" alt="" style="width:100px; margin-top:45px" class="center">
 <div class="luka-box">
 <h3 style="margin-top:0px">_**Relevant skills**_</h3>
 <div style="font-size: 15px">
@@ -104,190 +104,48 @@ Here I compared the plant communities and soil features of two adjacent islands 
 </div>
 
 <div class="column-right">
-<h2>**Comparative study of the plants and soils on two islands**</h3>
 <div class="row">
-<div class="luka-box">
-Here I compared the plant communities and soil features of two adjacent islands in the Gulf of Maine. I used a combination of deductive and inferential techniques combined with simple visualizations and tables that highlight how these islands differ.
-[The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al_2016b.pdf)
-</div>
-</div>
-<div class="gal-row">
-<div class="gal-col">
-<a href="images/soils ordination.png">
-<img src="images/soils ordination.png" alt="Duck Island Vegetation Figure" style="width: 100%; border:0;">
-</a>
-</div>
-<div class="gal-col">
-<a href="images/Duck islands.png">
-<img id= "duck_veg" src="images/Duck islands.png" alt="Duck Island Vegetation Figure" style="width:100%; border:0;">
-</a>
-</div>
-</div>
-</div>
-<hr>
-</div>
-</div>
-
-<br><br><br><br><br>
-
-
-
-
-<div class="row">
-  <div class="column-left">
-    <img src="icons/trees dark.png" alt="" style="width:100px; margin-top:45px" class="center">
-    <div class="luka-box">
-    **Relevant skills**
-      <div style="font-size: 12px">
-        | **- Ordination**
-        | **- Regression**
-        | **- Data visualization**
-        | **- Data collection/cleaning**
-        | **- Research design**
-        | **- Writing**
-      </div>
-    </div>
-  </div>
-  <div class="column-right">
-    <div class="row">
-    </div>
-    <div class="row">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-<div class="row">
-<div class="row">
-<div class="column-left">
-<img src="icons/trees dark.png" alt="" style="width:100px; margin-top:45px" class="center">
-<div class="luka-box">
-
-**Relevant skills**
-
-<div style="font-size: 12px">
-| **- Ordination**
-| **- Regression**
-| **- Data visualization**
-| **- Data collection/cleaning**
-| **- Research design**
-| **- Writing**
-</div>
-
-</div>
-</div>
-<div class="column-right">
-<h2>**Comparative study of the plants and soils on two islands**</h3>
-<div class="luka-box">
-Here I compared the plant communities and soil features of two adjacent islands in the Gulf of Maine. I used a combination of deductive and inferential techniques combined with simple visualizations and tables that highlight how these islands differ.
-
-[The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al_2016b.pdf)
-</div>
-</div>
-</div>
-
-<div class="column-right">
-<div class="row">
-<a href="images/soils ordination.png">
-<img src="images/soils ordination.png" alt="Duck Island Vegetation Figure" style="width: 70%; border:0;"> 
-</a>
-<a href="images/Duck islands.png">
-<img id= "duck_veg" src="images/Duck islands.png" alt="Duck Island Vegetation Figure" style="width:26%; border:0;">
-</a>
-</div>
-<hr>
-</div>
-</div>
-
-<br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row">
-<div class="row">
-<div class="column-left">
-<img src="icons/trees dark.png" alt="" style="width:100px; margin-top:45px" class="center">
-<div class="luka-box">
-
-**Relevant skills**
-
-<div style="font-size: 12px">
-| **- Ordination**
-| **- Regression**
-| **- Data visualization**
-| **- Data collection/cleaning**
-| **- Research design**
-| **- Writing**
-</div>
-
-</div>
-</div>
-<div class="column-right">
-<h2>**Comparative study of the plants and soils on two islands**</h3>
-<div class="luka-box">
-Here I compared the plant communities and soil features of two adjacent islands in the Gulf of Maine. I used a combination of deductive and inferential techniques combined with simple visualizations and tables that highlight how these islands differ.
-
-[The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al_2016b.pdf)
-</div>
-</div>
-</div>
-
-<div class="column-right">
-<div class="row">
-<a href="images/soils ordination.png">
-<img src="images/soils ordination.png" alt="Duck Island Vegetation Figure" style="width: 70%; border:0;"> 
-</a>
-<a href="images/Duck islands.png">
-<img id= "duck_veg" src="images/Duck islands.png" alt="Duck Island Vegetation Figure" style="width:26%; border:0;">
-</a>
-</div>
-<hr>
-</div>
-</div>
-
-
-<div class="row">
-<div class="row">
-<div class="column-left">
-<img src="icons/leaf dark.png" alt="" style="width:80px; margin-top:45px" class="center">
-</div>
-<div class="column-right">
-<h2>**Can plant dispersal drive ecosystem function?**</h3>
 <div class="luka-box">
 In this study I compared the variation of plant functional traits across 30 islands in the Gulf of Maine to test the potential role of plant dispersal on island ecosystems. I used a combination of regression, hierarchical Bayesian, ordination, and model comparison approaches.
 
 [The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al-2016-ecography.pdf)
 </div>
 </div>
+<div class="gal-row">
+<a href="images/ordination.jpg">
+<img src="images/ordination.jpg" alt="Functional Traits on Islands Ordination" style="width: 100%; border:0;"> 
+</a>
+<div class="gal-col">
+<a href="images/Regression.png">
+<img id= "duck_veg" src="images/Regression.png" alt="Functional Traits on Islands Regression" style="width:100%; border:0;">
+</a>
+</div>
+<div class="gal-col">
+<a href="images/bayesian.png">
+<img id= "duck_veg" src="images/bayesian.png" alt="Functional Traits on Islands Bayesian" style="width:100%; border:0;">
+</a>
+</div>
+</div>
+</div>
+</div>
+<hr>
+
+<br><br><br>
+
+
+
+
+
+
+
+<div class="luka-box">
+
+</div>
+</div>
 </div>
 <div class="column-right">
 <div class="row">
-<a href="images/ordination.jpg">
-<img src="images/ordination.jpg" alt="Functional Traits on Islands Ordination" style="width: 97%; border:0;"> 
-</a>
-<a href="images/Regression.png">
-<img id= "duck_veg" src="images/Regression.png" alt="Functional Traits on Islands Regression" style="width:70%; border:0;">
-</a>
-<a href="images/bayesian.png">
-<img id= "duck_veg" src="images/bayesian.png" alt="Functional Traits on Islands Bayesian" style="width:25%; border:0;">
-</a>
+
 </div>
 <hr>
 </div>
