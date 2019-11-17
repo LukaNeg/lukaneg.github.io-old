@@ -24,7 +24,7 @@
 
 img {
   border-radius: 5px;
-  margin: 10px 5px 10px 5px;
+  margin: 5px 5px 5px 5px;
 }
 
 a:hover img {
@@ -52,6 +52,50 @@ hr {
     background-color: #26596B !important;
     border-color: #26596B !important;
 }
+
+/* image gallery CSS: */
+
+.gal-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create two equal columns that sits next to each other */
+.gal-col {
+  flex: 50%;
+  max-width: 50%;
+  padding: 0 4px;
+}
+
+.gal-col img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a one column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .gal-col {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .gal-col {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+
+
+
+
+
+
 
 .center {
   display: block;
@@ -88,14 +132,14 @@ body {
 
 .column-left{
   float: left;
-  width: 20%;
+  width: 30%;
   text-align: left;
   padding-right: 15px;
   padding-left: 15px;
 }
 .column-right{
   float: right;
-  width: 80%;
+  width: 70%;
   text-align: left;
   padding-right: 15px;
   padding-left: 15px;
