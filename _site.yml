@@ -11,7 +11,7 @@ navbar:
       href: portfolio.html
     - text: "Resume"
       icon: fa-file
-      href: images/resume_10_12_19.pdf
+      href: resume.html
   right:
     - icon: fa-envelope-o
       href: mailto:lukanegoita@gmail.com

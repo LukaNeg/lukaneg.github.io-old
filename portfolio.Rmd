@@ -108,7 +108,7 @@ Here I compared the plant communities and soil features of two adjacent islands 
 <div class="luka-box">
 In this study I compared the variation of plant functional traits across 30 islands in the Gulf of Maine to test the potential role of plant dispersal on island ecosystems. I used a combination of regression, hierarchical Bayesian, ordination, and model comparison approaches.
 
-[The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al-2016-ecography.pdf)
+[The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al-2016-ecography.pdf){target="_blank"}
 </div>
 </div>
 <div class="gal-row">

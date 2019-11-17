@@ -1,0 +1,21 @@
+---
+pagetitle: "Resume"
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=F}
+knitr::opts_chunk$set(echo = FALSE, cache=T)
+```
+
+
+```{css, echo=FALSE}
+# this adjusts the current page
+body .main-container {
+  max-width: 1000px !important;
+  width: 1000px !important;
+}
+body {
+  max-width: 1000px !important;
+}
+```
