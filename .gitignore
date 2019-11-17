@@ -39,7 +39,4 @@ rsconnect/
 *.Rproj
 /private_data/*
 
-/images/*
 /scripts/*
-icons/*
-/icons/*
