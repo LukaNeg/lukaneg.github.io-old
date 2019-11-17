@@ -31,5 +31,5 @@ a:hover img {
 
 
 <a href="resumes/resume_10_12_19.pdf">
-<img src="resumes/resume_10_12_19.pdf" alt="Negoita_resume_10_12_19.pdf" style="border:0;" class="resume center"> 
+<img src="resumes/resume_10_12_19.png" alt="Negoita_resume_10_12_19.pdf " style="border:0;" class="resume center"> 
 </a>
