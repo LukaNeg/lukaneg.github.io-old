@@ -51,8 +51,8 @@ source("scripts/welcome_page.R")
 
 <br>
 <br>
-<p><b>
-I believe the fundamental beauty of the world comes from understanding the stories behind the patterns we see—and that is what I seek as a data scientist. I eat, sleep, and breathe managing, analyzing, visualizing, and presenting data. Have some data? Let me clean it. Have some numbers? Let me tell a story.
+<p><b style="opacity:0.8">
+*I believe the fundamental beauty of the world comes from understanding the stories behind the patterns we see—and that is what I seek as a data scientist. I eat, sleep, and breathe managing, analyzing, visualizing, and presenting data. Have some data? Let me clean it. Have some numbers? Let me tell a story.*
 <br>
 </b></p>
 
