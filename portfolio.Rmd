@@ -23,13 +23,26 @@ body {
 ```
 
 <h3>*UNDER CONSTRUCTION*</h3>
-
 <br>
 
 <div class="row">
 <div class="row">
 <div class="column-left">
 <img src="icons/trees dark.png" alt="" style="width:100px; margin-top:45px" class="center">
+<div class="luka-box">
+
+**Relevant skills**
+
+<div style="font-size: 12px">
+| **- Ordination**
+| **- Regression**
+| **- Data visualization**
+| **- Data collection/cleaning**
+| **- Research design**
+| **- Writing**
+</div>
+
+</div>
 </div>
 <div class="column-right">
 <h2>**Comparative study of the plants and soils on two islands**</h3>
