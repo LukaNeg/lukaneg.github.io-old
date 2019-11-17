@@ -61,12 +61,12 @@ Here I compared the plant communities and soil features of two adjacent islands 
 </div>
 <div class="gal-row">
 <div class="gal-col">
-<a href="images/soils ordination.png" target="_blank">
+<a href="images/soils ordination.png">
 <img src="images/soils ordination.png" alt="Duck Island Vegetation Figure" style="width: 100%; border:0;">
 </a>
 </div>
 <div class="gal-col">
-<a href="images/Duck islands.png" target="_blank">
+<a href="images/Duck islands.png">
 <img id= "duck_veg" src="images/Duck islands.png" alt="Duck Island Vegetation Figure" style="width:100%; border:0;">
 </a>
 </div>
