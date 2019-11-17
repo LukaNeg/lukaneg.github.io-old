@@ -1,5 +1,5 @@
 ---
-title: "Under Construction"
+title: "Characterizing personality and interest types"
 subtitle: "description"
 author: "Luka Negoita"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
