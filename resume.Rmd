@@ -30,6 +30,6 @@ a:hover img {
 <h3 style="text-align:center">**Click below to download**</h3>
 
 
-<a href="resume/resume_10_12_19.pdf">
-<img src="resume/resume_10_12_19.pdf" alt="Negoita_resume_10_12_19.pdf" style="border:0;" class="resume center"> 
+<a href="resumes/resume_10_12_19.pdf">
+<img src="resumes/resume_10_12_19.pdf" alt="Negoita_resume_10_12_19.pdf" style="border:0;" class="resume center"> 
 </a>
