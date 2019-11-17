@@ -1,0 +1,96 @@
+---
+title: "Under Construction"
+subtitle: "description"
+author: "Luka Negoita"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    smooth_scroll: false
+    highlight: tango
+editor_options: 
+  chunk_output_type: inline
+---
+
+<!-- Great reference for reproducible research: -->
+<!-- https://nceas.github.io/sasap-training/materials/reproducible_research_in_r_fairbanks/ -->
+
+
+```{css, echo=FALSE}
+# this adjusts the current page
+body .main-container {
+  max-width: 1000px !important;
+  width: 1000px !important;
+}
+body {
+  width: auto;
+  max-width: 1000px !important;
+}
+.toc-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+```
+
+```{r setup, include=FALSE}
+# set knitr chunk options for entire document
+## center and hold placement of figures, don't print package and function messages/warnings
+knitr::opts_chunk$set(fig.align = "center", fig.pos = "h", 
+                      message = FALSE, warning = FALSE)
+library(knitr)
+
+# load "behind-the-scenes" R packages, create custom graphic options 
+library(citr)
+library(tidyverse)
+library(lubridate)
+#library(ggplot2)
+# mythemes <- list(
+#     theme(strip.background = element_rect(color = NA)) +
+#     theme(axis.text.x = element_text(size = 14)) + theme(axis.text.y = element_text(size = 14)) + 
+#     theme(axis.title.x = element_text(size = 16)) + theme(axis.title.y = element_text(size = 16)) +
+#     theme(legend.title = element_text(size = 14)) + theme(legend.text = element_text(size = 14)) +
+#     theme(strip.text.x = element_text(size = 14)) + theme(plot.title = element_text(size = 16)))
+```
+
+
+<br>
+# Background
+I want to learn a bit more about myself so I realized, why not "scrape" my own personal data and see what I can learn or at least visualize. My first foray will be into studying my Amazon web purchases. For better or for worse, Amazon has made it incredibly easy to purchase anything you need, but it all began with books. So lets take a look at my Amazon book purchase history.
+
+
+
+
+
+
+I always said my computer is my life... so lets find out what it has to say about me.
+
+First, here is the code I used to scrape everything in my Documents directory and create a list of files with all of their info:
+
+```{r eval=F, echo=T}
+setwd("~/Documents")
+all_dir <- list.dirs()
+file_data <- NULL
+for(d in all_dir){
+  files <- list.files(path=d)
+  for(f in files){
+    file_data <- rbind(file_data,as.data.frame(file.info(paste(d,f, sep="/"))))
+  }
+}
+```
+
+<br>
+But this took a long time to run, so here are the data uploaded now
+
+```{r echo=T, message=FALSE, results="hide"}
+file_data <- read_csv("private_data/scraped_files_info.csv")
+```
+
+# Session info
+***
+
+```{r}
+sessionInfo()
+```
+
+

@@ -6,7 +6,7 @@
 
 #library(kohonen)
 #library(fmsb)
-library(tidyverse)
+
 
 responses <- read_csv("analyses/cluster_analysis/data/responses.csv")
 legend <- read_csv("analyses/cluster_analysis/data/columns.csv")

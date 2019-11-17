@@ -25,7 +25,6 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -95,15 +94,6 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 
-.sourceCode .row {
-  width: 100%;
-}
-.sourceCode {
-  overflow-x: auto;
-}
-.code-folding-btn {
-  margin-right: -30px;
-}
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -337,9 +327,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -481,14 +468,6 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Under Construction</h1>
@@ -501,41 +480,39 @@ div.tocify {
 
 <!-- Great reference for reproducible research: -->
 <!-- https://nceas.github.io/sasap-training/materials/reproducible_research_in_r_fairbanks/ -->
-<style>
+<style type="text/css">
+# this adjusts the current page
+body .main-container {
+  max-width: 1000px !important;
+  width: 1000px !important;
+}
 body {
   width: auto;
-  max-width: 1000;
+  max-width: 1000px !important;
 }
-
 .toc-content {
   padding-left: 20px;
   padding-right: 20px;
 }
 </style>
-<p>   </p>
-<div id="overview" class="section level1">
-<h1>Overview</h1>
-<hr />
-<p><em>Summary of project, data, and analysis.</em></p>
-<p>    # Data preparation **<em> </em>Here is where you work on data cleaning, preparations for analyses.*</p>
-<p>   </p>
-</div>
-<div id="analysis" class="section level1">
-<h1>Analysis</h1>
-<hr />
-<p><em>Here is where you present your analyses, figures, etc.</em></p>
-<p>   </p>
-</div>
-<div id="discussion" class="section level1">
-<h1>Discussion</h1>
-<hr />
-<p><em>Summary of your entire report.</em></p>
-<p>   </p>
-</div>
+<p><br> # Background I want to learn a bit more about myself so I realized, why not “scrape” my own personal data and see what I can learn or at least visualize. My first foray will be into studying my Amazon web purchases. For better or for worse, Amazon has made it incredibly easy to purchase anything you need, but it all began with books. So lets take a look at my Amazon book purchase history.</p>
+<p>I always said my computer is my life… so lets find out what it has to say about me.</p>
+<p>First, here is the code I used to scrape everything in my Documents directory and create a list of files with all of their info:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">setwd</span>(<span class="st">&quot;~/Documents&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>all_dir &lt;-<span class="st"> </span><span class="kw">list.dirs</span>()</span>
+<span id="cb1-3"><a href="#cb1-3"></a>file_data &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">for</span>(d <span class="cf">in</span> all_dir){</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path=</span>d)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="cf">for</span>(f <span class="cf">in</span> files){</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    file_data &lt;-<span class="st"> </span><span class="kw">rbind</span>(file_data,<span class="kw">as.data.frame</span>(<span class="kw">file.info</span>(<span class="kw">paste</span>(d,f, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))))</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  }</span>
+<span id="cb1-9"><a href="#cb1-9"></a>}</span></code></pre></div>
+<p><br> But this took a long time to run, so here are the data uploaded now</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>file_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;private_data/scraped_files_info.csv&quot;</span>)</span></code></pre></div>
 <div id="session-info" class="section level1">
 <h1>Session info</h1>
 <hr />
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
 ## Running under: macOS  10.14.5
@@ -553,7 +530,7 @@ body {
 ## other attached packages:
 ##  [1] lubridate_1.7.4 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.3    
 ##  [5] purrr_0.2.5     readr_1.1.1     tidyr_0.8.2     tibble_2.1.3   
-##  [9] ggplot2_3.1.0   tidyverse_1.2.1 citr_0.3.2     
+##  [9] ggplot2_3.1.0   tidyverse_1.2.1 citr_0.3.2      knitr_1.25     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] tidyselect_0.2.5 xfun_0.10        haven_2.2.0      lattice_0.20-38 
@@ -561,17 +538,14 @@ body {
 ##  [9] rlang_0.4.0      later_0.8.0      pillar_1.4.2     withr_2.1.2     
 ## [13] glue_1.3.0       modelr_0.1.2     readxl_1.1.0     plyr_1.8.4      
 ## [17] munsell_0.5.0    gtable_0.2.0     cellranger_1.1.0 rvest_0.3.2     
-## [21] evaluate_0.14    knitr_1.25       httpuv_1.4.5.1   broom_0.5.0     
-## [25] Rcpp_1.0.2       xtable_1.8-3     promises_1.0.1   backports_1.1.2 
-## [29] scales_1.0.0     jsonlite_1.6     mime_0.6         hms_0.4.2       
-## [33] digest_0.6.18    stringi_1.4.3    shiny_1.2.0      grid_3.5.1      
-## [37] cli_1.0.1        tools_3.5.1      magrittr_1.5     lazyeval_0.2.1  
-## [41] crayon_1.3.4     pkgconfig_2.0.2  xml2_1.2.0       rstudioapi_0.10 
-## [45] assertthat_0.2.0 rmarkdown_1.16   httr_1.4.1       R6_2.3.0        
-## [49] nlme_3.1-137     compiler_3.5.1</code></pre>
-<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
-
-</div>
+## [21] evaluate_0.14    httpuv_1.4.5.1   broom_0.5.0      Rcpp_1.0.2      
+## [25] xtable_1.8-3     promises_1.0.1   backports_1.1.2  scales_1.0.0    
+## [29] jsonlite_1.6     mime_0.6         hms_0.4.2        digest_0.6.18   
+## [33] stringi_1.4.3    shiny_1.2.0      grid_3.5.1       cli_1.0.1       
+## [37] tools_3.5.1      magrittr_1.5     lazyeval_0.2.1   crayon_1.3.4    
+## [41] pkgconfig_2.0.2  xml2_1.2.0       rstudioapi_0.10  assertthat_0.2.0
+## [45] rmarkdown_1.16   httr_1.4.1       R6_2.3.0         nlme_3.1-137    
+## [49] compiler_3.5.1</code></pre>
 </div>
 
 <br>
@@ -614,11 +588,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 <script>
 $(document).ready(function ()  {
