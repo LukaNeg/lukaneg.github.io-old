@@ -10,10 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Luka Negoita" />
+<meta name="author" content="" />
 
 
-<title>Under Construction</title>
+<title>Scraping data about myself</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -470,10 +470,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Under Construction</h1>
-<h3 class="subtitle">description</h3>
-<h4 class="author">Luka Negoita</h4>
-<h4 class="date">17 November, 2019</h4>
+<h1 class="title toc-ignore">Scraping data about myself</h1>
+<h3 class="subtitle">What data can I gather and analyze to learn more about myself?</h3>
+<h4 class="date">Last Update: 17 November, 2019</h4>
 
 </div>
 
@@ -495,25 +494,193 @@ body {
   padding-right: 20px;
 }
 </style>
-<p><br> # Background I want to learn a bit more about myself so I realized, why not “scrape” my own personal data and see what I can learn or at least visualize. My first foray will be into studying my Amazon web purchases. For better or for worse, Amazon has made it incredibly easy to purchase anything you need, but it all began with books. So lets take a look at my Amazon book purchase history.</p>
-<p>I always said my computer is my life… so lets find out what it has to say about me.</p>
-<p>First, here is the code I used to scrape everything in my Documents directory and create a list of files with all of their info:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">setwd</span>(<span class="st">&quot;~/Documents&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>all_dir &lt;-<span class="st"> </span><span class="kw">list.dirs</span>()</span>
-<span id="cb1-3"><a href="#cb1-3"></a>file_data &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">for</span>(d <span class="cf">in</span> all_dir){</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path=</span>d)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="cf">for</span>(f <span class="cf">in</span> files){</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    file_data &lt;-<span class="st"> </span><span class="kw">rbind</span>(file_data,<span class="kw">as.data.frame</span>(<span class="kw">file.info</span>(<span class="kw">paste</span>(d,f, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))))</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  }</span>
-<span id="cb1-9"><a href="#cb1-9"></a>}</span></code></pre></div>
-<p><br> But this took a long time to run, so here are the data uploaded now</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>file_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;private_data/scraped_files_info.csv&quot;</span>)</span></code></pre></div>
-<div id="session-info" class="section level1">
-<h1>Session info</h1>
-<hr />
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
-<pre><code>## R version 3.5.1 (2018-07-02)
+<p><br></p>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>I want to learn a bit more about myself so I realized, why not “scrape” my own personal data and see what I can learn or at least visualize. My first foray will be into studying my Amazon web purchases. For better or for worse, Amazon has made it incredibly easy to purchase anything I need. But it all began with books. So lets take a look at the data I can “scrape” on my book purchase history. I say “scrape,” but it’s all readily available to download from my Amazon user account. I just went to my Amazon Account page, clicked on “Download order reports,” and selected a date range that included my entire Amazon history.</p>
+<p><img src="images/amazon_screen.png" alt="amazon order history" style="width:100%" class="center image-border"></p>
+<p><br> First, I just need to upload some important packages and functions I use later</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse) <span class="co"># Best library for data wrangling</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Custom function for plotting transparent colors:</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>t_col &lt;-<span class="st"> </span><span class="cf">function</span>(color, <span class="dt">percent =</span> <span class="dv">50</span>) {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  rgb.val &lt;-<span class="st"> </span><span class="kw">col2rgb</span>(color)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  t.col &lt;-<span class="st"> </span><span class="kw">rgb</span>(rgb.val[<span class="dv">1</span>], rgb.val[<span class="dv">2</span>], rgb.val[<span class="dv">3</span>], <span class="dt">max =</span> <span class="dv">255</span>, <span class="dt">alpha =</span> (<span class="dv">100</span><span class="op">-</span>percent)<span class="op">*</span><span class="dv">255</span><span class="op">/</span><span class="dv">100</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">invisible</span>(t.col)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>}</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="load-and-clean-data" class="section level1">
+<h1>Load and Clean Data</h1>
+<p>Then I uploade these data to R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>amazon_raw &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;private_data/my_amazon_history.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>amazon_raw</span></code></pre></div>
+<pre><code>## # A tibble: 622 x 36
+##    `Order Date` `Order ID` Title Category `ASIN/ISBN` `UNSPSC Code` Website
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;  
+##  1 7/7/08       058-08218… Log … Paperba… 014004261X       55101500 Amazon…
+##  2 9/11/08      103-85256… Foun… Paperba… 226705943        55101500 Amazon…
+##  3 10/1/08      102-66135… Garm… Wireles… B000PDR230       49000000 Amazon…
+##  4 2/20/09      103-27488… Tomb… Home     B00135DJQ8       60121500 Amazon…
+##  5 2/20/09      103-27488… Remb… Paperba… 486241602        55101500 Amazon…
+##  6 4/7/09       103-01892… Niji… Kitchen  B000KNNKKE       60120000 Amazon…
+##  7 4/7/09       103-81047… Eart… Paperba… 716784904        55101500 Amazon…
+##  8 4/20/09      103-62819… Dino… Paperba… 312104561        55101500 Amazon…
+##  9 5/6/09       103-28285… Shur… Electro… B00006I5SB       60131401 Amazon…
+## 10 5/6/09       103-95296… TCC … Electro… B000J46TFW       52161547 Amazon…
+## # … with 612 more rows, and 29 more variables: `Release Date` &lt;chr&gt;,
+## #   Condition &lt;chr&gt;, Seller &lt;chr&gt;, `Seller Credentials` &lt;chr&gt;, `List Price
+## #   Per Unit` &lt;chr&gt;, `Purchase Price Per Unit` &lt;chr&gt;, Quantity &lt;int&gt;,
+## #   `Payment Instrument Type` &lt;chr&gt;, `Purchase Order Number` &lt;chr&gt;, `PO
+## #   Line Number` &lt;chr&gt;, `Ordering Customer Email` &lt;chr&gt;, `Shipment
+## #   Date` &lt;chr&gt;, `Shipping Address Name` &lt;chr&gt;, `Shipping Address Street
+## #   1` &lt;chr&gt;, `Shipping Address Street 2` &lt;chr&gt;, `Shipping Address
+## #   City` &lt;chr&gt;, `Shipping Address State` &lt;chr&gt;, `Shipping Address
+## #   Zip` &lt;chr&gt;, `Order Status` &lt;chr&gt;, `Carrier Name &amp; Tracking
+## #   Number` &lt;chr&gt;, `Item Subtotal` &lt;chr&gt;, `Item Subtotal Tax` &lt;chr&gt;, `Item
+## #   Total` &lt;chr&gt;, `Tax Exemption Applied` &lt;chr&gt;, `Tax Exemption
+## #   Type` &lt;chr&gt;, `Exemption Opt-Out` &lt;chr&gt;, `Buyer Name` &lt;chr&gt;,
+## #   Currency &lt;chr&gt;, `Group Name` &lt;chr&gt;</code></pre>
+<p>As you can see, there are a lot of data here and I definitely didn’t need all the columns. So let’s clean this up a bit.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># First select the columns I want to keep and rename them:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>amazon_clean &lt;-<span class="st"> </span><span class="kw">select</span>(amazon_raw, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>                       <span class="dt">order_date=</span><span class="st">`</span><span class="dt">Order Date</span><span class="st">`</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>                       <span class="dt">category=</span>Category,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>                       <span class="dt">title=</span>Title,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>                       <span class="dt">cost=</span><span class="st">`</span><span class="dt">Item Total</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">  </span><span class="co"># Then convert the cost with &#39;$&#39; sign into numeric,</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="st">  </span><span class="co"># convert the date into Date format, the category</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="st">  </span><span class="co"># into a factor, sort everything by date, and finally</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="st">  </span><span class="co"># calculate cumulative spending:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cost =</span> <span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">$&quot;</span>,<span class="st">&quot;&quot;</span>,cost)),</span>
+<span id="cb4-12"><a href="#cb4-12"></a>         <span class="dt">order_date =</span> <span class="kw">as.Date</span>(order_date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%y&quot;</span>),</span>
+<span id="cb4-13"><a href="#cb4-13"></a>         <span class="dt">category=</span><span class="kw">as.factor</span>(category),</span>
+<span id="cb4-14"><a href="#cb4-14"></a>         <span class="dt">cum_spending =</span> <span class="kw">cumsum</span>(cost))</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a>amazon_clean</span></code></pre></div>
+<pre><code>## # A tibble: 622 x 5
+##    order_date category       title                        cost cum_spending
+##    &lt;date&gt;     &lt;fct&gt;          &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;
+##  1 2008-07-07 Paperback      Log from the &#39;Sea of Cort…   1.95         1.95
+##  2 2008-09-11 Paperback      Foundations of Ecology: C…  36           38.0 
+##  3 2008-10-01 Wireless Phon… Garmin eTrex Venture HC H… 117          155.  
+##  4 2009-02-20 Home           Tombow MONO Professional …  11.0        166.  
+##  5 2009-02-20 Paperback      Rembrandt Landscape Drawi…   6.95       173.  
+##  6 2009-04-07 Kitchen        Niji Waterbrush Small        5.25       178.  
+##  7 2009-04-07 Paperback      Earth&#39;s Climate: Past and…  68.6        247.  
+##  8 2009-04-20 Paperback      Dinosaurs in the Attic: A…   4.99       252.  
+##  9 2009-05-06 Electronics    Shure M97xE High-Performa…  69.1        321.  
+## 10 2009-05-06 Electronics    TCC TC-400G/L Phono Pream…  29.5        350.  
+## # … with 612 more rows</code></pre>
+<p>Now that’s more like it. A nice clean dataframe to work with.</p>
+<p><br></p>
+</div>
+<div id="plot-results" class="section level1">
+<h1>Plot Results</h1>
+<p>Now for a quick plot to see some results:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Plot cumulative spending by order date:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">plot</span>(<span class="dt">data=</span>amazon_clean, cum_spending<span class="op">~</span>order_date, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>) </span></code></pre></div>
+<p><img src="personal-scrape_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Interesting… Not a final figure, but interesting to notice there were times when I was buying more and times when I wasn’t buying as much. But I want to look at books specifically. I know this doesn’t account for all book purchases, but after 2010 when I first started my Prime membership (yay for free 2-day shipping!), I’m sure almost all of my book purchases came from Amazon.</p>
+<p>For now, I just want to extract the history of how many books I purchased over time</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>amazon_books &lt;-<span class="st"> </span><span class="kw">filter</span>(amazon_clean,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>                       category <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Paperback&quot;</span>,<span class="st">&quot;Staple Bound&quot;</span>,<span class="st">&quot;Pamphlet&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                                       <span class="st">&quot;Hardcover&quot;</span>,<span class="st">&quot;Mass Market Paperback&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>                                       <span class="st">&quot;Perfect Paperback&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">  </span><span class="co"># and add in a column for the cummulative total number of books purchased:</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cum_spending =</span> <span class="kw">cumsum</span>(cost),</span>
+<span id="cb7-7"><a href="#cb7-7"></a>         <span class="dt">cum_total =</span> <span class="kw">cumsum</span>(cost<span class="op">&gt;=</span><span class="dv">0</span>))</span></code></pre></div>
+<p>Now, I’ll plot a nicer figure to show my book purchase history as well as adding in some markers on some significant moments in my life.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dat &lt;-<span class="st"> </span>amazon_books <span class="co"># just change the variable name to make it easier to write</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># prepare useful variables for plotting parameters:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>years &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">year</span>(dat<span class="op">$</span>order_date))</span>
+<span id="cb8-5"><a href="#cb8-5"></a>years &lt;-<span class="st"> </span><span class="kw">c</span>(years,<span class="st">&quot;2020&quot;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>jan1year &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">paste</span>(years,<span class="dv">01</span>,<span class="dv">01</span>,<span class="dt">sep=</span><span class="st">&quot;-&quot;</span>))</span>
+<span id="cb8-7"><a href="#cb8-7"></a>total=<span class="kw">nrow</span>(dat)</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">par</span>(<span class="dt">mai=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">1.2</span>,.<span class="dv">5</span>,.<span class="dv">5</span>)) <span class="co"># plotting parameters</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="kw">plot</span>(<span class="dt">data=</span>dat, cum_total<span class="op">~</span>order_date, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">axes=</span>F, <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">min</span>(jan1year),<span class="kw">as.Date</span>(<span class="st">&quot;2020-01-01&quot;</span>)),</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">240</span>))</span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co"># create the axes to my specifications:</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at=</span>jan1year,<span class="dt">labels=</span>years, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">cex=</span>.<span class="dv">5</span>)</span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>),<span class="dt">labels=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>), <span class="dt">las=</span><span class="dv">2</span>)</span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co"># add axis and main labels:</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="kw">mtext</span>(<span class="st">&quot;Year&quot;</span>,<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="fl">3.5</span>, <span class="dt">cex=</span><span class="fl">1.2</span>)</span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="kw">mtext</span>(<span class="st">&quot;Books Purchased</span><span class="ch">\n</span><span class="st">(cumulative)&quot;</span>,<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.2</span>)</span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="kw">mtext</span>(<span class="dt">side=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.4</span>,<span class="st">&quot;Cumulative number of books purchased&quot;</span>, <span class="dt">font=</span><span class="dv">2</span>, <span class="dt">adj=</span><span class="dv">0</span>)</span>
+<span id="cb8-21"><a href="#cb8-21"></a></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="co"># plot my cumulative total books as a filled shape:</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="kw">polygon</span>(<span class="dt">x=</span><span class="kw">c</span>(dat<span class="op">$</span>order_date, <span class="kw">rev</span>(dat<span class="op">$</span>order_date)), <span class="dt">y=</span><span class="kw">c</span>(dat<span class="op">$</span>cum_total,<span class="kw">rep</span>(<span class="dv">0</span>,total)),</span>
+<span id="cb8-24"><a href="#cb8-24"></a>        <span class="dt">border=</span>F, <span class="dt">col=</span><span class="kw">t_col</span>(<span class="st">&quot;darkgreen&quot;</span>,<span class="dv">50</span>))</span></code></pre></div>
+<p><img src="personal-scrape_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Great! Now just add in a few important moments in my life</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># gradauated undergrad</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">arrows</span>(<span class="dt">x0=</span><span class="kw">as.Date</span>(<span class="st">&quot;2011-06-06&quot;</span>), <span class="dt">x1=</span><span class="kw">as.Date</span>(<span class="st">&quot;2011-06-06&quot;</span>), <span class="dt">y0=</span><span class="dv">0</span>, <span class="dt">y1=</span><span class="dv">70</span>, <span class="dt">length=</span>.<span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">text</span>(<span class="st">&quot;B.A. in Human Ecology&quot;</span>, <span class="dt">x=</span><span class="kw">as.Date</span>(<span class="st">&quot;2011-06-06&quot;</span>), <span class="dt">y=</span><span class="dv">80</span>, <span class="dt">adj=</span>.<span class="dv">9</span>, <span class="dt">cex=</span>.<span class="dv">7</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># started grad school</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">arrows</span>(<span class="dt">x0=</span><span class="kw">as.Date</span>(<span class="st">&quot;2012-08-16&quot;</span>), <span class="dt">x1=</span><span class="kw">as.Date</span>(<span class="st">&quot;2012-08-16&quot;</span>), <span class="dt">y0=</span><span class="dv">0</span>, <span class="dt">y1=</span><span class="dv">105</span>, <span class="dt">length=</span>.<span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="kw">text</span>(<span class="st">&quot;Started grad school&quot;</span>, <span class="dt">x=</span><span class="kw">as.Date</span>(<span class="st">&quot;2012-08-16&quot;</span>), <span class="dt">y=</span><span class="dv">115</span>, <span class="dt">adj=</span>.<span class="dv">9</span>, <span class="dt">cex=</span>.<span class="dv">7</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># passed qualifying exam</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="kw">arrows</span>(<span class="dt">x0=</span><span class="kw">as.Date</span>(<span class="st">&quot;2014-10-16&quot;</span>), <span class="dt">x1=</span><span class="kw">as.Date</span>(<span class="st">&quot;2014-10-16&quot;</span>), <span class="dt">y0=</span><span class="dv">0</span>, <span class="dt">y1=</span><span class="dv">150</span>, <span class="dt">length=</span>.<span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="kw">text</span>(<span class="st">&quot;Passed the qualifying exam&quot;</span>, <span class="dt">x=</span><span class="kw">as.Date</span>(<span class="st">&quot;2014-10-16&quot;</span>), <span class="dt">y=</span><span class="dv">160</span>, <span class="dt">adj=</span>.<span class="dv">9</span>, <span class="dt">cex=</span>.<span class="dv">7</span>)</span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co"># graduated grad school</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="kw">arrows</span>(<span class="dt">x0=</span><span class="kw">as.Date</span>(<span class="st">&quot;2018-05-13&quot;</span>), <span class="dt">x1=</span><span class="kw">as.Date</span>(<span class="st">&quot;2018-05-13&quot;</span>), <span class="dt">y0=</span><span class="dv">0</span>, <span class="dt">y1=</span><span class="dv">200</span>, <span class="dt">length=</span>.<span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="kw">text</span>(<span class="st">&quot;Ph.D. in Ecology&quot;</span>, <span class="dt">x=</span><span class="kw">as.Date</span>(<span class="st">&quot;2018-05-13&quot;</span>), <span class="dt">y=</span><span class="dv">210</span>, <span class="dt">adj=</span>.<span class="dv">9</span>, <span class="dt">cex=</span>.<span class="dv">7</span>)</span>
+<span id="cb9-16"><a href="#cb9-16"></a></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co"># moved to Galapagos</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="kw">arrows</span>(<span class="dt">x0=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019-04-10&quot;</span>), <span class="dt">x1=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019-04-10&quot;</span>), <span class="dt">y0=</span><span class="dv">0</span>, <span class="dt">y1=</span><span class="dv">225</span>, <span class="dt">length=</span>.<span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="kw">text</span>(<span class="st">&quot;Moved to Galápagos&quot;</span>, <span class="dt">x=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019-04-10&quot;</span>), <span class="dt">y=</span><span class="dv">235</span>, <span class="dt">adj=</span>.<span class="dv">9</span>, <span class="dt">cex=</span>.<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="personal-scrape_files/figure-html/amazon-books-plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>And voila!</p>
+<p><br></p>
+<!-- Removes white space at end of document: -->
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
+
+</div>
+<!-- Ok, so from August 27, 2012 I was always on prime until this September? -->
+<!-- and before that, just Oct 3 2010 - Oct 3 2011? -->
+<!-- 
+I always said my computer is my life... so lets find out what it has to say about me.
+
+First, here is the code I used to scrape everything in my Documents directory and create a list of files with all of their info:
+
+
+```r
+setwd("~/Documents")
+all_dir <- list.dirs()
+file_data <- NULL
+for(d in all_dir){
+  files <- list.files(path=d)
+  for(f in files){
+    file_data <- rbind(file_data,as.data.frame(file.info(paste(d,f, sep="/"))))
+  }
+}
+```
+
+<br>
+But this took a long time to run, so here are the data uploaded now
+
+
+```r
+file_data <- read_csv("private_data/scraped_files_info.csv")
+```
+
+# Session info
+***
+
+
+```r
+sessionInfo()
+```
+
+```
+## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
 ## Running under: macOS  10.14.5
 ## 
@@ -528,24 +695,27 @@ body {
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] lubridate_1.7.4 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.3    
-##  [5] purrr_0.2.5     readr_1.1.1     tidyr_0.8.2     tibble_2.1.3   
-##  [9] ggplot2_3.1.0   tidyverse_1.2.1 citr_0.3.2      knitr_1.25     
+##  [1] knitr_1.25      lubridate_1.7.4 forcats_0.3.0   stringr_1.3.1  
+##  [5] dplyr_0.8.3     purrr_0.2.5     readr_1.1.1     tidyr_0.8.2    
+##  [9] tibble_2.1.3    ggplot2_3.1.0   tidyverse_1.2.1 citr_0.3.2     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] tidyselect_0.2.5 xfun_0.10        haven_2.2.0      lattice_0.20-38 
-##  [5] colorspace_1.3-2 miniUI_0.1.1.1   htmltools_0.3.6  yaml_2.2.0      
-##  [9] rlang_0.4.0      later_0.8.0      pillar_1.4.2     withr_2.1.2     
-## [13] glue_1.3.0       modelr_0.1.2     readxl_1.1.0     plyr_1.8.4      
-## [17] munsell_0.5.0    gtable_0.2.0     cellranger_1.1.0 rvest_0.3.2     
-## [21] evaluate_0.14    httpuv_1.4.5.1   broom_0.5.0      Rcpp_1.0.2      
-## [25] xtable_1.8-3     promises_1.0.1   backports_1.1.2  scales_1.0.0    
-## [29] jsonlite_1.6     mime_0.6         hms_0.4.2        digest_0.6.18   
-## [33] stringi_1.4.3    shiny_1.2.0      grid_3.5.1       cli_1.0.1       
-## [37] tools_3.5.1      magrittr_1.5     lazyeval_0.2.1   crayon_1.3.4    
-## [41] pkgconfig_2.0.2  xml2_1.2.0       rstudioapi_0.10  assertthat_0.2.0
-## [45] rmarkdown_1.16   httr_1.4.1       R6_2.3.0         nlme_3.1-137    
-## [49] compiler_3.5.1</code></pre>
+##  [5] vctrs_0.2.0      colorspace_1.3-2 miniUI_0.1.1.1   htmltools_0.3.6 
+##  [9] yaml_2.2.0       utf8_1.1.4       rlang_0.4.0      later_0.8.0     
+## [13] pillar_1.4.2     withr_2.1.2      glue_1.3.0       modelr_0.1.2    
+## [17] readxl_1.1.0     plyr_1.8.4       munsell_0.5.0    gtable_0.2.0    
+## [21] cellranger_1.1.0 rvest_0.3.2      evaluate_0.14    httpuv_1.4.5.1  
+## [25] fansi_0.4.0      broom_0.5.0      Rcpp_1.0.2       xtable_1.8-3    
+## [29] promises_1.0.1   backports_1.1.2  scales_1.0.0     jsonlite_1.6    
+## [33] mime_0.6         hms_0.4.2        digest_0.6.18    stringi_1.4.3   
+## [37] shiny_1.2.0      grid_3.5.1       cli_1.0.1        tools_3.5.1     
+## [41] magrittr_1.5     lazyeval_0.2.1   zeallot_0.1.0    crayon_1.3.4    
+## [45] pkgconfig_2.0.2  xml2_1.2.0       rstudioapi_0.10  assertthat_0.2.0
+## [49] rmarkdown_1.16   httr_1.4.1       R6_2.3.0         nlme_3.1-137    
+## [53] compiler_3.5.1
+```
+ -->
 </div>
 
 <br>

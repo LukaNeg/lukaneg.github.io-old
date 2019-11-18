@@ -1,8 +1,8 @@
 ---
-title: "Under Construction"
-subtitle: "description"
-author: "Luka Negoita"
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+title: "Scraping data about myself"
+subtitle: "What data can I gather and analyze to learn more about myself?"
+author: ""
+date: 'Last Update: `r format(Sys.time(), "%d %B, %Y")`'
 output:
   html_document:
     toc: true
@@ -55,14 +55,186 @@ library(lubridate)
 
 
 <br>
+
 # Background
-I want to learn a bit more about myself so I realized, why not "scrape" my own personal data and see what I can learn or at least visualize. My first foray will be into studying my Amazon web purchases. For better or for worse, Amazon has made it incredibly easy to purchase anything you need, but it all began with books. So lets take a look at my Amazon book purchase history.
+I want to learn a bit more about myself so I realized, why not "scrape" my own personal data and see what I can learn or at least visualize. My first foray will be into studying my Amazon web purchases. For better or for worse, Amazon has made it incredibly easy to purchase anything I need. But it all began with books. So lets take a look at the data I can "scrape" on my book purchase history. I say "scrape," but it's all readily available to download from my Amazon user account. I just went to my Amazon Account page, clicked on "Download order reports," and selected a date range that included my entire Amazon history.
+
+<img src="images/amazon_screen.png" alt="amazon order history" style="width:100%" class="center image-border">
+
+<br>
+First, I just need to upload some important packages and functions I use later
+```{r}
+library(tidyverse) # Best library for data wrangling
+
+# Custom function for plotting transparent colors:
+t_col <- function(color, percent = 50) {
+  rgb.val <- col2rgb(color)
+  t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3], max = 255, alpha = (100-percent)*255/100)
+  invisible(t.col)
+}
+```
+<br>
+
+# Load and Clean Data
+Then I uploade these data to R:
+```{r}
+amazon_raw <- read_csv("private_data/my_amazon_history.csv")
+amazon_raw
+```
+
+As you can see, there are a lot of data here and I definitely didn't need all the columns. So let's clean this up a bit.
+
+```{r}
+# First select the columns I want to keep and rename them:
+amazon_clean <- select(amazon_raw, 
+                       order_date=`Order Date`,
+                       category=Category,
+                       title=Title,
+                       cost=`Item Total`) %>%
+  # Then convert the cost with '$' sign into numeric,
+  # convert the date into Date format, the category
+  # into a factor, sort everything by date, and finally
+  # calculate cumulative spending:
+  mutate(cost = as.numeric(gsub("\\$","",cost)),
+         order_date = as.Date(order_date, format="%m/%d/%y"),
+         category=as.factor(category),
+         cum_spending = cumsum(cost))
+
+amazon_clean
+```
+
+Now that's more like it. A nice clean dataframe to work with. 
+
+<br>
+
+# Plot Results
+Now for a quick plot to see some results:
+
+```{r}
+# Plot cumulative spending by order date:
+plot(data=amazon_clean, cum_spending~order_date, type="l") 
+```
+
+Interesting... Not a final figure, but interesting to notice there were times when I was buying more and times when I wasn't buying as much. But I want to look at books specifically. I know this doesn't account for all book purchases, but after 2010 when I first started my Prime membership (yay for free 2-day shipping!), I'm sure almost all of my book purchases came from Amazon.
+
+For now, I just want to extract the history of how many books I purchased over time
+
+```{r}
+amazon_books <- filter(amazon_clean,
+                       category %in% c("Paperback","Staple Bound","Pamphlet",
+                                       "Hardcover","Mass Market Paperback",
+                                       "Perfect Paperback")) %>%
+  # and add in a column for the cummulative total number of books purchased:
+  mutate(cum_spending = cumsum(cost),
+         cum_total = cumsum(cost>=0))
+```
+
+Now, I'll plot a nicer figure to show my book purchase history as well as adding in some markers on some significant moments in my life.
+
+```{r}
+dat <- amazon_books # just change the variable name to make it easier to write
+
+# prepare useful variables for plotting parameters:
+years <- unique(year(dat$order_date))
+years <- c(years,"2020")
+jan1year <- as.Date(paste(years,01,01,sep="-"))
+total=nrow(dat)
+
+par(mai=c(1,1.2,.5,.5)) # plotting parameters
+
+plot(data=dat, cum_total~order_date, type="n", axes=F, ylab="",xlab="", xlim=c(min(jan1year),as.Date("2020-01-01")),
+    ylim=c(0,240))
+
+# create the axes to my specifications:
+axis(1, at=jan1year,labels=years, las=2, cex=.5, cex=.5)
+axis(2, at=seq(0,200,50),labels=seq(0,200,50), las=2)
+# add axis and main labels:
+mtext("Year",side=1, line=3.5, cex=1.2)
+mtext("Books Purchased\n(cumulative)",side=2, line=3, cex=1.2)
+mtext(side=3, cex=1.4,"Cumulative number of books purchased", font=2, adj=0)
+
+# plot my cumulative total books as a filled shape:
+polygon(x=c(dat$order_date, rev(dat$order_date)), y=c(dat$cum_total,rep(0,total)),
+        border=F, col=t_col("darkgreen",50))
+```
+
+Great! Now just add in a few important moments in my life
+
+```{r eval=F, echo=T}
+# gradauated undergrad
+arrows(x0=as.Date("2011-06-06"), x1=as.Date("2011-06-06"), y0=0, y1=70, length=.1, lwd=2)
+text("B.A. in Human Ecology", x=as.Date("2011-06-06"), y=80, adj=.9, cex=.7)
+
+# started grad school
+arrows(x0=as.Date("2012-08-16"), x1=as.Date("2012-08-16"), y0=0, y1=105, length=.1, lwd=2)
+text("Started grad school", x=as.Date("2012-08-16"), y=115, adj=.9, cex=.7)
+
+# passed qualifying exam
+arrows(x0=as.Date("2014-10-16"), x1=as.Date("2014-10-16"), y0=0, y1=150, length=.1, lwd=2)
+text("Passed the qualifying exam", x=as.Date("2014-10-16"), y=160, adj=.9, cex=.7)
+
+# graduated grad school
+arrows(x0=as.Date("2018-05-13"), x1=as.Date("2018-05-13"), y0=0, y1=200, length=.1, lwd=2)
+text("Ph.D. in Ecology", x=as.Date("2018-05-13"), y=210, adj=.9, cex=.7)
+
+# moved to Galapagos
+arrows(x0=as.Date("2019-04-10"), x1=as.Date("2019-04-10"), y0=0, y1=225, length=.1, lwd=2)
+text("Moved to Galápagos", x=as.Date("2019-04-10"), y=235, adj=.9, cex=.7)
+```
+
+```{r amazon-books-plot, eval=T, echo=F}
+par(mai=c(1,1.2,.5,.5)) # plotting parameters
+plot(data=dat, cum_total~order_date, type="n", axes=F, ylab="",xlab="", xlim=c(min(jan1year),as.Date("2020-01-01")),
+    ylim=c(0,240))
+
+# create the axes to my specifications:
+axis(1, at=jan1year,labels=years, las=2, cex=.5, cex=.5)
+axis(2, at=seq(0,200,50),labels=seq(0,200,50), las=2)
+# add axis and main labels:
+mtext("Year",side=1, line=3.5, cex=1.2)
+mtext("Books Purchased\n(cumulative)",side=2, line=3, cex=1.2)
+mtext(side=3, cex=1.4,"Cumulative number of books purchased", font=2, adj=0)
+
+# plot my cumulative total books as a filled shape:
+polygon(x=c(dat$order_date, rev(dat$order_date)), y=c(dat$cum_total,rep(0,total)),
+        border=F, col=t_col("darkgreen",50))
+
+# gradauated undergrad
+arrows(x0=as.Date("2011-06-06"), x1=as.Date("2011-06-06"), y0=0, y1=70, length=.1, lwd=2)
+text("B.A. in Human Ecology", x=as.Date("2011-06-06"), y=80, adj=.9, cex=.7)
+
+# started grad school
+arrows(x0=as.Date("2012-08-16"), x1=as.Date("2012-08-16"), y0=0, y1=105, length=.1, lwd=2)
+text("Started grad school", x=as.Date("2012-08-16"), y=115, adj=.9, cex=.7)
+
+# passed qualifying exam
+arrows(x0=as.Date("2014-10-16"), x1=as.Date("2014-10-16"), y0=0, y1=150, length=.1, lwd=2)
+text("Passed the qualifying exam", x=as.Date("2014-10-16"), y=160, adj=.9, cex=.7)
+
+# graduated grad school
+arrows(x0=as.Date("2018-05-13"), x1=as.Date("2018-05-13"), y0=0, y1=200, length=.1, lwd=2)
+text("Ph.D. in Ecology", x=as.Date("2018-05-13"), y=210, adj=.9, cex=.7)
+
+# moved to Galapagos
+arrows(x0=as.Date("2019-04-10"), x1=as.Date("2019-04-10"), y0=0, y1=225, length=.1, lwd=2)
+text("Moved to Galápagos", x=as.Date("2019-04-10"), y=235, adj=.9, cex=.7)
+```
+
+And voila!
 
 
 
+<br>
+
+<!-- Removes white space at end of document: -->
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
 
 
+<!-- Ok, so from August 27, 2012 I was always on prime until this September? -->
+<!-- and before that, just Oct 3 2010 - Oct 3 2011? -->
 
+
+<!-- 
 I always said my computer is my life... so lets find out what it has to say about me.
 
 First, here is the code I used to scrape everything in my Documents directory and create a list of files with all of their info:
@@ -92,5 +264,9 @@ file_data <- read_csv("private_data/scraped_files_info.csv")
 ```{r}
 sessionInfo()
 ```
+ -->
+
+ 
+
 
 

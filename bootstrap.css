@@ -30,6 +30,15 @@ img {
     overflow-x: scroll;
 }
 
+.image-border {
+  box-shadow: 3px 3px 10px grey;
+}
+
+
+pre.sourceCode {
+    background-color: #E7EAE4;
+}
+
 a:hover img {
   opacity: .65;
   filter: alpha(opacity=65);
