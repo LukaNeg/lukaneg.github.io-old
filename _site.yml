@@ -12,6 +12,9 @@ navbar:
     - text: "Resume"
       icon: fa-file
       href: resume.html
+    - text: ""
+      icon: fa-coffee
+      href: resources.html
   right:
     - icon: fa-envelope-o
       href: mailto:lukanegoita@gmail.com

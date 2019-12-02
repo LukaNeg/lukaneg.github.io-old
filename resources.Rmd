@@ -1,0 +1,53 @@
+---
+title: "Coffee break"
+subtitle: "Resources or articles I find cool or interesting"
+author: ""
+date: 'Last Update: `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  html_document:
+    smooth_scroll: false
+    highlight: tango
+editor_options: 
+  chunk_output_type: inline
+---
+
+<!-- Great reference for reproducible research: -->
+<!-- https://nceas.github.io/sasap-training/materials/reproducible_research_in_r_fairbanks/ -->
+
+
+```{css, echo=FALSE}
+# this adjusts the current page
+body .main-container {
+  max-width: 1000px !important;
+  width: 1000px !important;
+}
+body {
+  width: auto;
+  max-width: 1000px !important;
+  padding-top: 3em;
+}
+.toc-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+```
+
+```{r setup, include=FALSE}
+# set knitr chunk options for entire document
+## center and hold placement of figures, don't print package and function messages/warnings
+knitr::opts_chunk$set(fig.align = "center", fig.pos = "h", 
+                      message = FALSE, warning = FALSE)
+```
+\ 
+
+* **Use reinforcement learning to train a computer to play tic tac toe** <br> https://www.robert-hickman.eu/post/r-inforcement_learning_one/
+
+* **Why not to use ggplot2** <br>
+https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
+
+
+
+
+<br><br><br><br>
+<!-- Removes white space at end of document: -->
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
