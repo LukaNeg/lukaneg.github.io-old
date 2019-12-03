@@ -4,7 +4,11 @@ title: ""
 output: html_document
 ---
 
+<br>
+<br>
+<div align="center">
 *Under Construction*
+</div>
 
 ```{r setup, include=FALSE, echo=F}
 knitr::opts_chunk$set(echo = FALSE, cache=T)
@@ -25,8 +29,6 @@ body {
 ```
 
 <!-- <h3>*UNDER CONSTRUCTION*</h3> -->
-<br>
-<br>
 
 <!-- _________________Duck Islands Paper_____________________________ -->
 <div class="row">
@@ -37,6 +39,7 @@ body {
 <h2>**Comparative study of the plants and soils on two islands**</h2>
 </div>
 </div>
+
 
 <div class="row">
 
@@ -96,7 +99,8 @@ Here I compared the plant communities and soil features of two adjacent islands 
 <h3 style="margin-top:0px">_**Relevant skills**_</h3>
 <div style="font-size: 15px">
 | **- Ordination**
-| **- Regression**
+| **- Bayesian regression**
+| **- Model selection**
 | **- Data visualization**
 | **- Data collection & cleaning**
 | **- Research design**
@@ -108,7 +112,7 @@ Here I compared the plant communities and soil features of two adjacent islands 
 <div class="column-right">
 <div class="row">
 <div class="luka-box">
-In this study I compared the variation of plant functional traits across 30 islands in the Gulf of Maine to test the potential role of plant dispersal on island ecosystems. I used a combination of regression, hierarchical Bayesian, ordination, and model comparison approaches.
+In this study I compared the variation of plant functional traits across 30 islands in the Gulf of Maine to test the potential role of plant dispersal on island ecosystems. This  was the first empirical study to show how island isolation can influence patterns of plant traits in island biogeography.
 
 [The full publication PDF is available here.](https://www.lukanegoita.com/uploads/1/3/5/3/13537361/negoita_et_al-2016-ecography.pdf){target="_blank"}
 </div>
@@ -132,76 +136,106 @@ In this study I compared the variation of plant functional traits across 30 isla
 </div>
 <hr>
 
-<br><br><br>
 
-
-
-
-
-
-
-<div class="luka-box">
-
-</div>
-</div>
-</div>
-<div class="column-right">
-<div class="row">
-
-</div>
-<hr>
-</div>
-</div>
-
-
-<div class="row">
+<!-- _________________Cluster analysis of Youth_____________________________ -->
 <div class="row">
 <div class="column-left">
-<img src="icons/head_dark.png" alt="" style="width:100px; margin-top:45px" class="center">
+<img src="icons/head_dark.png" alt="" style="width:100px" class="center">
 </div>
 <div class="column-right">
-<h2>**Cluster analysis on human personality traits**</h3>
+<br><br><br><br>
+<h2>**Cluster analysis on human personality traits**</h2>
+</div>
+</div>
+
+
+<div class="row">
+
+<div class="column-left">
+<div class="luka-box">
+<h3 style="margin-top:0px">_**Relevant skills**_</h3>
+<div style="font-size: 15px">
+| **- Cluster analysis**
+| **- Shiny R**
+| **- Data visualization**
+| **- Data cleaning**
+</div>
+</div>
+</div>
+
+<div class="column-right">
+<div class="row">
 <div class="luka-box">
 In 2013, students of the Statistics class at FSEV UK were asked to invite their friends to participate in this survey. The survey consisted of questions related to everything from fears, to hobbies, spending habits, and personality traits. After removing missing values, a k-means cluster analysis was conducted to identify major groupings of youth.
-
-[Interactive results are available as a minimalistic Shiny app.](https://lukanegoita.shinyapps.io/young_archetypes_of_slovakia/)
+[Interactive results are available as a simple Shiny app.](https://lukanegoita.shinyapps.io/young_archetypes_of_slovakia/)
 </div>
 </div>
-</div>
-
-<div class="column-right">
-<div class="row">
+<div class="gal-row">
 <a href="images/personality_clusters.png">
-<img src="images/personality_clusters.png" alt="Personality Clusters" style="width: 97%; border:0;"> 
+<img src="images/personality_clusters.png" alt="Personality Clusters" style="width: 100%; border:0;"> 
 </a>
 </div>
+
+<div class="gal-row">
+<div class="gal-col">
+<a href="images/Regression.png">
+<img id= "duck_veg" src="images/youth g4.png" alt="Youth Cluster 4" style="width:100%; border:0;">
+</a>
+</div>
+<div class="gal-col">
+<a href="images/Regression.png">
+<img id= "duck_veg" src="images/youth g3.png" alt="Youth Cluster 3" style="width:100%; border:0;">
+</a>
+</div>
+</div>
+</div>
+</div>
 <hr>
-</div>
-</div>
 
 
-<div class="row">
+<!-- _________________Stock market prediction_____________________________ -->
 <div class="row">
 <div class="column-left">
 <img src="icons/stock analysis dark.png" alt="" style="width:100px; margin-top:45px" class="center">
 </div>
 <div class="column-right">
-<h2>**Stock market trading using a genetic algorithm (and other models)**</h3>
+<br><br><br>
+<h2>**Stock market trading using a genetic algorithm (and other models)**</h2>
+</div>
+</div>
+
+
+<div class="row">
+
+<div class="column-left">
 <div class="luka-box">
-I used a combination of cross-correlation, linear and logistic regression, and Bayesian approaches, along with a genetic algorithm for optimizing a successeful stock prediction algorithm.
+<h3 style="margin-top:0px">_**Relevant skills**_</h3>
+<div style="font-size: 15px">
+| **- Evolutionary algorithms**
+| **- Logistic regression**
+| **- Bayesian inference**
+| **- Time-series analysis**
+| **- Data cleaning**
 </div>
 </div>
 </div>
 
 <div class="column-right">
 <div class="row">
-<a href="images/stock prediction.jpg">
-<img src="images/stock prediction.jpg" alt="Stock Prediction" style="width: 97%; border:0;"> 
+<div class="luka-box">
+I used a combination of cross-correlation, linear and logistic regression, and Bayesian approaches, along with a genetic algorithm for optimizing a successeful stock prediction algorithm.
+</div>
+</div>
+<div class="gal-row">
+<a href="images/personality_clusters.png">
+<img src="images/stock prediction.jpg" alt="Stock prediction example" style="width: 100%; border:0;"> 
 </a>
+
+</div>
+</div>
 </div>
 <hr>
-</div>
-</div>
+
 
 <div class="center">
 [.](markdown_pres_template.html)
