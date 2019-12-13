@@ -45,8 +45,17 @@ knitr::opts_chunk$set(fig.align = "center", fig.pos = "h",
 * **Why not to use ggplot2** <br>
 https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
+<br>
 
+## Thanks to [Eric R. Scott](http://www.ericrscott.com/#about):
+* **Cupcakes vs Muffins part 2: cool intro to partial least squares regression** <br>
+http://www.ericrscott.com/2019/03/21/cupcakes-vs-muffins-round-2/
 
+* **Cupcakes vs Muffins part 1: intro to webscraping** <br>
+http://www.ericrscott.com/2018/03/05/cupcakes-vs-muffins/
+
+* **Python is Weird** <br>
+http://www.ericrscott.com/2018/05/03/python-is-weird/
 
 <br><br><br><br>
 <!-- Removes white space at end of document: -->
