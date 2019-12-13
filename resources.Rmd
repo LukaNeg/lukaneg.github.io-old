@@ -2,7 +2,7 @@
 title: "Coffee break"
 subtitle: "Resources or articles I find cool or interesting"
 author: ""
-date: 'Last Update: `r format(Sys.time(), "%d %B, %Y")`'
+date: 'Last Update: *`r format(Sys.time(), "%d %B, %Y")`*'
 output:
   html_document:
     smooth_scroll: false
