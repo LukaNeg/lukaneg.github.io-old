@@ -57,6 +57,14 @@ http://www.ericrscott.com/2018/03/05/cupcakes-vs-muffins/
 * **Python is Weird** <br>
 http://www.ericrscott.com/2018/05/03/python-is-weird/
 
+<br>
+
+## Custom Tutorials
+
+* **Serpentine Diversity Tutorial** <br>
+[div_index_tutorial_by_quad.html](div_index_tutorial_by_quad.html)
+
+
 <br><br><br><br>
 <!-- Removes white space at end of document: -->
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
