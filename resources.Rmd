@@ -45,6 +45,9 @@ knitr::opts_chunk$set(fig.align = "center", fig.pos = "h",
 * **Why not to use ggplot2** <br>
 https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 
+* **Resources on learning R for beginners** <br>
+https://www.codementor.io/collections/learn-r-online-bwbcv0nx4
+
 <br>
 
 ## Thanks to [Eric R. Scott](http://www.ericrscott.com/#about):
