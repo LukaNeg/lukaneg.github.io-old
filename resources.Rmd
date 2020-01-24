@@ -48,6 +48,9 @@ https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 * **Resources on learning R for beginners** <br>
 https://www.codementor.io/collections/learn-r-online-bwbcv0nx4
 
+* **Great FAQ on Generalized Linear Mixed-Effect Models by Ben Bolker** <br>
+http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html
+
 <br>
 
 ## Thanks to [Eric R. Scott](http://www.ericrscott.com/#about):
