@@ -51,6 +51,9 @@ https://www.codementor.io/collections/learn-r-online-bwbcv0nx4
 * **Great FAQ on Generalized Linear Mixed-Effect Models by Ben Bolker** <br>
 http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html
 
+* **Great explanation of time-series analysis and how to do it with random forests** <br>
+https://www.statworx.com/de/blog/time-series-forecasting-with-random-forest/
+
 <br>
 
 ## Thanks to [Eric R. Scott](http://www.ericrscott.com/#about):
