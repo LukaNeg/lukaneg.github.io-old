@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -314,6 +313,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -342,6 +342,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -479,7 +485,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Scraping data about myself</h1>
 <h3 class="subtitle">What data can I gather and analyze to learn more about myself?</h3>
-<h4 class="date">Last Update: 31 January, 2020</h4>
+<h4 class="date">Last Update: 22 February, 2020</h4>
 
 </div>
 
@@ -524,7 +530,7 @@ body {
 <span id="cb2-2"><a href="#cb2-2"></a>amazon_raw</span></code></pre></div>
 <pre><code>## # A tibble: 622 x 36
 ##    `Order Date` `Order ID` Title Category `ASIN/ISBN` `UNSPSC Code` Website
-##    &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;  
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;  
 ##  1 7/7/08       058-08218… Log … Paperba… 014004261X       55101500 Amazon…
 ##  2 9/11/08      103-85256… Foun… Paperba… 226705943        55101500 Amazon…
 ##  3 10/1/08      102-66135… Garm… Wireles… B000PDR230       49000000 Amazon…
@@ -536,18 +542,17 @@ body {
 ##  9 5/6/09       103-28285… Shur… Electro… B00006I5SB       60131401 Amazon…
 ## 10 5/6/09       103-95296… TCC … Electro… B000J46TFW       52161547 Amazon…
 ## # … with 612 more rows, and 29 more variables: `Release Date` &lt;chr&gt;,
-## #   Condition &lt;chr&gt;, Seller &lt;chr&gt;, `Seller Credentials` &lt;chr&gt;, `List Price
-## #   Per Unit` &lt;chr&gt;, `Purchase Price Per Unit` &lt;chr&gt;, Quantity &lt;int&gt;,
-## #   `Payment Instrument Type` &lt;chr&gt;, `Purchase Order Number` &lt;chr&gt;, `PO
-## #   Line Number` &lt;chr&gt;, `Ordering Customer Email` &lt;chr&gt;, `Shipment
-## #   Date` &lt;chr&gt;, `Shipping Address Name` &lt;chr&gt;, `Shipping Address Street
-## #   1` &lt;chr&gt;, `Shipping Address Street 2` &lt;chr&gt;, `Shipping Address
-## #   City` &lt;chr&gt;, `Shipping Address State` &lt;chr&gt;, `Shipping Address
-## #   Zip` &lt;chr&gt;, `Order Status` &lt;chr&gt;, `Carrier Name &amp; Tracking
-## #   Number` &lt;chr&gt;, `Item Subtotal` &lt;chr&gt;, `Item Subtotal Tax` &lt;chr&gt;, `Item
-## #   Total` &lt;chr&gt;, `Tax Exemption Applied` &lt;chr&gt;, `Tax Exemption
-## #   Type` &lt;chr&gt;, `Exemption Opt-Out` &lt;chr&gt;, `Buyer Name` &lt;chr&gt;,
-## #   Currency &lt;chr&gt;, `Group Name` &lt;chr&gt;</code></pre>
+## #   Condition &lt;chr&gt;, Seller &lt;chr&gt;, `Seller Credentials` &lt;chr&gt;, `List Price Per
+## #   Unit` &lt;chr&gt;, `Purchase Price Per Unit` &lt;chr&gt;, Quantity &lt;dbl&gt;, `Payment
+## #   Instrument Type` &lt;chr&gt;, `Purchase Order Number` &lt;lgl&gt;, `PO Line
+## #   Number` &lt;lgl&gt;, `Ordering Customer Email` &lt;chr&gt;, `Shipment Date` &lt;chr&gt;,
+## #   `Shipping Address Name` &lt;chr&gt;, `Shipping Address Street 1` &lt;chr&gt;, `Shipping
+## #   Address Street 2` &lt;chr&gt;, `Shipping Address City` &lt;chr&gt;, `Shipping Address
+## #   State` &lt;chr&gt;, `Shipping Address Zip` &lt;chr&gt;, `Order Status` &lt;chr&gt;, `Carrier
+## #   Name &amp; Tracking Number` &lt;chr&gt;, `Item Subtotal` &lt;chr&gt;, `Item Subtotal
+## #   Tax` &lt;chr&gt;, `Item Total` &lt;chr&gt;, `Tax Exemption Applied` &lt;lgl&gt;, `Tax
+## #   Exemption Type` &lt;lgl&gt;, `Exemption Opt-Out` &lt;lgl&gt;, `Buyer Name` &lt;chr&gt;,
+## #   Currency &lt;chr&gt;, `Group Name` &lt;lgl&gt;</code></pre>
 <p>As you can see, there are a lot of data here and I definitely didn’t need all the columns. So let’s clean this up a bit.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># First select the columns I want to keep and rename them:</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>amazon_clean &lt;-<span class="st"> </span><span class="kw">select</span>(amazon_raw, </span>
@@ -566,18 +571,18 @@ body {
 <span id="cb4-15"><a href="#cb4-15"></a></span>
 <span id="cb4-16"><a href="#cb4-16"></a>amazon_clean</span></code></pre></div>
 <pre><code>## # A tibble: 622 x 5
-##    order_date category       title                        cost cum_spending
-##    &lt;date&gt;     &lt;fct&gt;          &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;
-##  1 2008-07-07 Paperback      Log from the &#39;Sea of Cort…   1.95         1.95
-##  2 2008-09-11 Paperback      Foundations of Ecology: C…  36           38.0 
-##  3 2008-10-01 Wireless Phon… Garmin eTrex Venture HC H… 117          155.  
-##  4 2009-02-20 Home           Tombow MONO Professional …  11.0        166.  
-##  5 2009-02-20 Paperback      Rembrandt Landscape Drawi…   6.95       173.  
-##  6 2009-04-07 Kitchen        Niji Waterbrush Small        5.25       178.  
-##  7 2009-04-07 Paperback      Earth&#39;s Climate: Past and…  68.6        247.  
-##  8 2009-04-20 Paperback      Dinosaurs in the Attic: A…   4.99       252.  
-##  9 2009-05-06 Electronics    Shure M97xE High-Performa…  69.1        321.  
-## 10 2009-05-06 Electronics    TCC TC-400G/L Phono Pream…  29.5        350.  
+##    order_date category       title                             cost cum_spending
+##    &lt;date&gt;     &lt;fct&gt;          &lt;chr&gt;                            &lt;dbl&gt;        &lt;dbl&gt;
+##  1 2008-07-07 Paperback      Log from the &#39;Sea of Cortez,&#39; …   1.95         1.95
+##  2 2008-09-11 Paperback      Foundations of Ecology: Classi…  36           38.0 
+##  3 2008-10-01 Wireless Phon… Garmin eTrex Venture HC High-I… 117          155.  
+##  4 2009-02-20 Home           Tombow MONO Professional Drawi…  11.0        166.  
+##  5 2009-02-20 Paperback      Rembrandt Landscape Drawings (…   6.95       173.  
+##  6 2009-04-07 Kitchen        Niji Waterbrush Small             5.25       178.  
+##  7 2009-04-07 Paperback      Earth&#39;s Climate: Past and Futu…  68.6        247.  
+##  8 2009-04-20 Paperback      Dinosaurs in the Attic: An Exc…   4.99       252.  
+##  9 2009-05-06 Electronics    Shure M97xE High-Performance M…  69.1        321.  
+## 10 2009-05-06 Electronics    TCC TC-400G/L Phono Preamp, Pr…  29.5        350.  
 ## # … with 612 more rows</code></pre>
 <p>Now that’s more like it. A nice clean dataframe to work with.</p>
 <p><br></p>
@@ -687,14 +692,19 @@ sessionInfo()
 ```
 
 ```
-## R version 3.5.1 (2018-07-02)
+## R version 3.6.2 (2019-12-12)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS  10.14.5
+## Running under: macOS Mojave 10.14.5
 ## 
 ## Matrix products: default
-## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
 ## 
+## Random number generation:
+##  RNG:     Mersenne-Twister 
+##  Normal:  Inversion 
+##  Sample:  Rounding 
+##  
 ## locale:
 ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
@@ -702,25 +712,26 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] knitr_1.25      lubridate_1.7.4 forcats_0.3.0   stringr_1.3.1  
-##  [5] dplyr_0.8.3     purrr_0.2.5     readr_1.1.1     tidyr_0.8.2    
-##  [9] tibble_2.1.3    ggplot2_3.1.0   tidyverse_1.2.1 citr_0.3.2     
+##  [1] knitr_1.28      lubridate_1.7.4 forcats_0.4.0   stringr_1.4.0  
+##  [5] dplyr_0.8.4     purrr_0.3.3     readr_1.3.1     tidyr_1.0.2    
+##  [9] tibble_2.1.3    ggplot2_3.2.1   tidyverse_1.3.0 citr_0.3.2     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_0.2.5 xfun_0.10        haven_2.2.0      lattice_0.20-38 
-##  [5] vctrs_0.2.0      colorspace_1.3-2 miniUI_0.1.1.1   htmltools_0.3.6 
-##  [9] yaml_2.2.0       utf8_1.1.4       rlang_0.4.0      later_0.8.0     
-## [13] pillar_1.4.2     withr_2.1.2      glue_1.3.0       modelr_0.1.2    
-## [17] readxl_1.1.0     plyr_1.8.4       munsell_0.5.0    gtable_0.2.0    
-## [21] cellranger_1.1.0 rvest_0.3.2      evaluate_0.14    httpuv_1.4.5.1  
-## [25] fansi_0.4.0      broom_0.5.0      Rcpp_1.0.2       xtable_1.8-3    
-## [29] promises_1.0.1   backports_1.1.2  scales_1.0.0     jsonlite_1.6    
-## [33] mime_0.6         hms_0.4.2        digest_0.6.18    stringi_1.4.3   
-## [37] shiny_1.2.0      grid_3.5.1       cli_1.0.1        tools_3.5.1     
-## [41] magrittr_1.5     lazyeval_0.2.1   zeallot_0.1.0    crayon_1.3.4    
-## [45] pkgconfig_2.0.2  xml2_1.2.0       rstudioapi_0.10  assertthat_0.2.0
-## [49] rmarkdown_1.16   httr_1.4.1       R6_2.3.0         nlme_3.1-137    
-## [53] compiler_3.5.1
+##  [1] Rcpp_1.0.3       lattice_0.20-38  assertthat_0.2.1 digest_0.6.24   
+##  [5] utf8_1.1.4       mime_0.9         R6_2.4.1         cellranger_1.1.0
+##  [9] backports_1.1.5  reprex_0.3.0     evaluate_0.14    httr_1.4.1      
+## [13] pillar_1.4.3     rlang_0.4.4      lazyeval_0.2.2   readxl_1.3.1    
+## [17] rstudioapi_0.11  miniUI_0.1.1.1   rmarkdown_2.1    munsell_0.5.0   
+## [21] shiny_1.4.0      broom_0.5.4      compiler_3.6.2   httpuv_1.5.2    
+## [25] modelr_0.1.5     xfun_0.12        pkgconfig_2.0.3  htmltools_0.4.0 
+## [29] tidyselect_1.0.0 fansi_0.4.1      crayon_1.3.4     dbplyr_1.4.2    
+## [33] withr_2.1.2      later_1.0.0      grid_3.6.2       nlme_3.1-142    
+## [37] jsonlite_1.6.1   xtable_1.8-4     gtable_0.3.0     lifecycle_0.1.0 
+## [41] DBI_1.1.0        magrittr_1.5     scales_1.1.0     cli_2.0.1       
+## [45] stringi_1.4.6    fs_1.3.1         promises_1.1.0   xml2_1.2.2      
+## [49] vctrs_0.2.3      generics_0.0.2   tools_3.6.2      glue_1.3.1      
+## [53] hms_0.5.3        fastmap_1.0.1    yaml_2.2.1       colorspace_1.4-1
+## [57] rvest_0.3.5      haven_2.2.0
 ```
  -->
 </div>

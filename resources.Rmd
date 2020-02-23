@@ -73,6 +73,9 @@ http://www.ericrscott.com/2018/05/03/python-is-weird/
 * **Serpentine Diversity Tutorial** <br>
 [div_index_tutorial_by_quad.html](div_index_tutorial_by_quad.html)
 
+* **Serpentine Diversity Analysis Final** <br>
+[div_index_tutorial_by_quad.html](final_serpentine_phoschek_analysis.html)
+
 
 <br><br><br><br>
 <!-- Removes white space at end of document: -->
