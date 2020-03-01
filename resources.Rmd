@@ -74,7 +74,10 @@ http://www.ericrscott.com/2018/05/03/python-is-weird/
 [div_index_tutorial_by_quad.html](div_index_tutorial_by_quad.html)
 
 * **Serpentine Diversity Analysis Final** <br>
-[div_index_tutorial_by_quad.html](final_serpentine_phoschek_analysis.html)
+[final_serpentine_phoschek_analysis.html](final_serpentine_phoschek_analysis.html)
+
+* **Analyzing the arrival of Coronavirus** <br>
+[coronavirus_analysis_v4.html](coronavirus_analysis_v4.html)
 
 
 <br><br><br><br>
