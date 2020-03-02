@@ -76,7 +76,7 @@ http://www.ericrscott.com/2018/05/03/python-is-weird/
 * **Serpentine Diversity Analysis Final** <br>
 [final_serpentine_phoschek_analysis.html](final_serpentine_phoschek_analysis.html)
 
-* **Analyzing the arrival of Coronavirus** <br>
+* **Analyzing the arrival of Coronavirus to Galapagos** <br>
 [coronavirus_analysis_v4.html](coronavirus_analysis_v4.html)
 
 
