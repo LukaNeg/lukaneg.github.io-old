@@ -77,7 +77,7 @@ http://www.ericrscott.com/2018/05/03/python-is-weird/
 [final_serpentine_phoschek_analysis.html](final_serpentine_phoschek_analysis.html)
 
 * **Analyzing the arrival of Coronavirus to Galapagos** <br>
-[Latest Version (March 2, 2020)](coronavirus_analysis_v4.html)
+[Latest Version (March 8, 2020)](analyses/coronavirus_analysis_v4.html)
 
 
 <br><br><br><br>
