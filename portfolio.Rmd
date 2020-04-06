@@ -7,7 +7,6 @@ output: html_document
 <br>
 <br>
 <div align="center">
-*Under Construction*
 </div>
 
 ```{r setup, include=FALSE, echo=F}
