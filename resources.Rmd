@@ -54,6 +54,9 @@ http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html
 * **Great explanation of time-series analysis and how to do it with random forests** <br>
 https://www.statworx.com/de/blog/time-series-forecasting-with-random-forest/
 
+* **Excellent set of cheatsheets (resources) for all things data science** <br>
+https://www.thinkful.com/blog/data-scientist-cheat-sheet/
+
 <br>
 
 ## Thanks to [Eric R. Scott](http://www.ericrscott.com/#about):
